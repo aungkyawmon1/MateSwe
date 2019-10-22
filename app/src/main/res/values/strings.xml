@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MateSwe</string>
+
+    //name of button navigation
+    <string name="title_home">ပင်မ</string>
+    <string name="title_category">အမျိုးအစား</string>
+    <string name="title_saved">သိမ်းဆည်း</string>
+    <string name="title_profile">ပရိုဖိုင်</string>
+
+</resources>
