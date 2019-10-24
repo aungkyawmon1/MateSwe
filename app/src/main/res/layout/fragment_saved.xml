@@ -3,12 +3,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.SavedFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:text="@string/app_name"
+            android:layout_marginTop="@dimen/card_view_margin"
+            android:layout_marginLeft="@dimen/fragment_title_margin_small"
+            android:fontFamily="@font/robotoslabbold"
+            android:textSize="@dimen/fragment_title_margin_medium"
+            android:textColor="@color/app_color"/>
+    </LinearLayout>
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/title_saved" />
+        android:layout_marginTop="75dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+                android:elevation="5dp"
+                app:cardCornerRadius="3dp">
+
+                <ImageView
+                    android:id="@+id/iv_post_image"
+                    android:layout_width="@dimen/favourite_card_view_width"
+                    android:layout_height="@dimen/favourite_card_view_height"
+                    android:scaleType="fitXY" />
+
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:id="@+id/ll_post_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add photo: "/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add_circle_black_24dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fragment_title_margin_medium"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_book_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:hint="Book Name"/>
+
+                <EditText
+                    android:id="@+id/et_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Author"
+                    android:lines="1"
+                    android:layout_marginTop="@dimen/fragment_title_margin_small"/>
+
+
+                <EditText
+                    android:id="@+id/et_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Price"
+                    android:lines="1"
+                    android:layout_marginTop="@dimen/fragment_title_margin_small"
+                    android:inputType="number"/>
+
+                <EditText
+                    android:id="@+id/et_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Summary"
+                    android:layout_marginTop="@dimen/fragment_title_margin_small"/>
+
+                <Button
+                    android:id="@+id/btn_post"
+                    android:layout_width="@dimen/fragment_title_margin_extra_large"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fragment_title_margin_medium"
+                    android:text="တင်မည်"
+                    android:textColor="#fff"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_round_corner"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

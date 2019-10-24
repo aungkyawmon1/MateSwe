@@ -3,12 +3,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_profile" />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_title_margin_small"
+            android:layout_marginRight="@dimen/fragment_title_margin_small"
+            android:text="@string/edit"
+            android:textSize="16dp"
+            android:textColor="#000"
+            android:layout_gravity="right"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/iv_profile1"
+            android:layout_width="@dimen/profile_layout"
+            android:layout_height="@dimen/profile_layout"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_button"
+            android:layout_marginTop="@dimen/fragment_title_margin_large"/>
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_title_margin_small"
+            android:text="\@appsnippuser"
+            android:textSize="28dp"
+            android:textStyle="bold"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="5dp"
+            app:cardCornerRadius="3dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/fragment_title_margin_small">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="@dimen/fragment_title_margin_extra_small"
+                            android:src="@drawable/icon_phone"
+                            style="@style/profileDetailsImage" />
+
+                        <TextView
+                            android:layout_weight="2"
+                            android:id="@+id/tv_phone_no"
+                            android:text="094029399303"
+                            android:layout_marginStart="@dimen/fragment_title_margin_medium"
+                            android:layout_marginTop="@dimen/fragment_title_margin_extra_small"
+                            style="@style/profileDetailsTextMain" />
+
+                    </LinearLayout>
+
+                    <View android:layout_marginStart="88dp"
+                        style="@style/proifleDetailsView"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/fragment_title_margin_small">
+
+                        <ImageView
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="@dimen/fragment_title_margin_extra_small"
+                            android:src="@drawable/icon_address"
+                            android:tint="#995544"
+                            style="@style/profileDetailsImage" />
+
+                        <TextView
+                            android:text="Mand"
+                            android:id="@+id/tv_address"
+                            android:layout_marginStart="@dimen/fragment_title_margin_medium"
+                            android:layout_marginTop="@dimen/fragment_title_margin_extra_small"
+                            style="@style/profileDetailsTextMain" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+        </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fragment_title_margin_medium"
+            android:text="logout"
+            android:layout_gravity="center"
+            android:background="@drawable/button_delete"/>
+        </LinearLayout>
+
+
 
 </FrameLayout>

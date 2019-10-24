@@ -16,7 +16,7 @@
     //Saved
     <item
         android:id="@+id/navigation_saved"
-        android:icon="@drawable/icon_saved"
+        android:icon="@drawable/ic_add_circle_black_24dp"
         android:title="@string/title_saved"/>
 
     //Profile

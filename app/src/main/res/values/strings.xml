@@ -1,10 +1,18 @@
 <resources>
-    <string name="app_name">MateSwe</string>
+    <string name="app_name">မိတ်ဆွေ</string>
 
     //name of button navigation
     <string name="title_home">ပင်မ</string>
     <string name="title_category">အမျိုးအစား</string>
-    <string name="title_saved">သိမ်းဆည်း</string>
+    <string name="title_saved">အသစ်တင်ရန်</string>
     <string name="title_profile">ပရိုဖိုင်</string>
+
+    //Artical
+    <string name="title_latest_book">နောက်ဆုံးထွက် စာအုပ်များ</string>
+    <string name="title_most_read_book">လူကြိုက်အများဆုံး စာအုပ်များ</string>
+    <string name="books">စာအုပ်များ</string>
+
+    //Edit
+    <string name="edit">ပြင်ဆင်ရန်</string>
 
 </resources>
