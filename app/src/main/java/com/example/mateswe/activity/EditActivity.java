@@ -1,33 +1,30 @@
-package com.example.mateswe.fragment;
+package com.example.mateswe.activity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.mateswe.R;
 import com.example.mateswe.db.AppDatabase;
 import com.example.mateswe.entity.Book;
 
+public class EditActivity extends AppCompatActivity {
 
-public class SavedFragment extends Fragment {
-
+    String id;
+    Book book;
 
     private LinearLayout photoAdd;
     private ImageView addPhoto;
@@ -35,20 +32,36 @@ public class SavedFragment extends Fragment {
     private Button post;
     private CardView cardView;
     private EditText bookName, author, price, summary;
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_saved, container, false);
-        cardView = view.findViewById(R.id.card_post);
-        photoAdd = view.findViewById(R.id.ll_post_image);
-        addPhoto = view.findViewById(R.id.iv_post_image);
-        bookName = view.findViewById(R.id.et_book_name);
-        author = view.findViewById(R.id.et_author);
-        price = view.findViewById(R.id.et_price);
-        summary =view.findViewById(R.id.et_summary);
-        post = view.findViewById(R.id.btn_post);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit);
+
+        cardView = findViewById(R.id.card_post);
+        photoAdd = findViewById(R.id.ll_post_image);
+        addPhoto = findViewById(R.id.iv_post_image);
+        bookName = findViewById(R.id.et_book_name);
+        author = findViewById(R.id.et_author);
+        price = findViewById(R.id.et_price);
+        summary = findViewById(R.id.et_summary);
+        post = findViewById(R.id.btn_post);
+
+        id = getIntent().getExtras().getString("id");
+
+        book = AppDatabase.getAppDatabase(EditActivity.this).bookDao().findByID(id);
+        if(book.getPhoto()!= null){
+            cardView.setVisibility(View.VISIBLE);
+            photoAdd.setVisibility(View.GONE);
+            Glide.with(this)
+                    .load(Uri.parse(book.getPhoto()))
+                    .into(addPhoto);
+        }
+        bookName.setText(book.getBook_name());
+        author.setText(book.getAuthor());
+        price.setText(book.getPrice());
+        summary.setText(book.getSummary());
+
+
 
         post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,17 +72,18 @@ public class SavedFragment extends Fragment {
                 String strSummary = summary.getText().toString();
                 String strPhoto = null;
                 if(selectedImage != null){
-                   strPhoto = selectedImage.toString();
+                    strPhoto = selectedImage.toString();
                 }
                 Book book= new Book();
+                book.setId(Integer.parseInt(id));
                 book.setBook_name(strBookName);
                 book.setAuthor(strAuthor);
                 book.setPrice(strPrice);
                 book.setSummary(strSummary);
                 book.setPhoto(strPhoto);
-                AppDatabase.getAppDatabase(getContext()).bookDao().insert(book);
-                Toast.makeText(getContext(),"Posted!",Toast.LENGTH_SHORT).show();
-                clearData();
+                AppDatabase.getAppDatabase(getApplicationContext()).bookDao().update(book);
+                Toast.makeText(getApplicationContext(),"Posted!",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
         photoAdd.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +99,8 @@ public class SavedFragment extends Fragment {
                 pickFromGallery();
             }
         });
-        return view;
+
+
     }
 
     private void pickFromGallery() {
@@ -101,9 +116,9 @@ public class SavedFragment extends Fragment {
 
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Result code is RESULT_OK only if the user selects an Image
-        Log.e("eeee", "onActivityResult: " );
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK)
             switch (requestCode) {
                 case 11:
@@ -115,15 +130,5 @@ public class SavedFragment extends Fragment {
                     break;
             }
 
-    }
-
-    public void clearData(){
-        cardView.setVisibility(View.GONE);
-        photoAdd.setVisibility(View.VISIBLE);
-
-        bookName.setText("");
-        author.setText("");
-        price.setText("");
-        summary.setText("");
     }
 }

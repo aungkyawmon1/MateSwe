@@ -1,7 +1,9 @@
 package com.example.mateswe.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ public class BookActivity extends AppCompatActivity {
     private Button edit, delete;
     private TextView bookName, author, price, summary;
     Book book;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,18 +40,18 @@ public class BookActivity extends AppCompatActivity {
         summary = findViewById(R.id.tv_summary);
 
 
-        String id = getIntent().getExtras().getString("id");
-
-        Toast.makeText(getApplicationContext(),"Password must be same!"+id,Toast.LENGTH_SHORT).show();
+        id = getIntent().getExtras().getString("id");
 
         book = AppDatabase.getAppDatabase(BookActivity.this).bookDao().findByID(id);
-//        Glide.with(this)
-//                .load(Uri.parse(book.getPhoto()))
-//                .into(bookPhoto);
-//        bookName.setText(book.getBook_name());
-//        author.setText(book.getAuthor());
-//        price.setText(book.getPrice());
-//        summary.setText(book.getSummary());
+        if(book.getPhoto()!= null) {
+            Glide.with(this)
+                    .load(Uri.parse(book.getPhoto()))
+                    .into(bookPhoto);
+        }
+        bookName.setText(book.getBook_name());
+        author.setText(book.getAuthor());
+        price.setText(book.getPrice());
+        summary.setText(book.getSummary());
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,9 +62,52 @@ public class BookActivity extends AppCompatActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent I = new Intent(getApplicationContext(), LoginActivity.class);
-                I.putExtra("id" , "1");
+                Intent I = new Intent(BookActivity.this, EditActivity.class);
+                I.putExtra("id" , id);
+                startActivity(I);
+
             }
         });
+
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BookActivity.this);
+                alertDialogBuilder.setMessage("Are you sure, you want to delete");
+                        alertDialogBuilder.setPositiveButton("yes",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        AppDatabase.getAppDatabase(BookActivity.this).bookDao().delete(book);
+                                        finish();
+                                    }
+                                });
+
+                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() { // 0 - for private mode
+        book = AppDatabase.getAppDatabase(BookActivity.this).bookDao().findByID(id);
+        if(book.getPhoto()!= null) {
+            Glide.with(this)
+                    .load(Uri.parse(book.getPhoto()))
+                    .into(bookPhoto);
+        }
+        bookName.setText(book.getBook_name());
+        author.setText(book.getAuthor());
+        price.setText(book.getPrice());
+        summary.setText(book.getSummary());
+        super.onResume();
     }
 }

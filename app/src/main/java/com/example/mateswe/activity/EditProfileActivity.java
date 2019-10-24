@@ -2,6 +2,7 @@ package com.example.mateswe.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +11,6 @@ import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,10 +26,11 @@ import com.example.mateswe.entity.User;
 public class EditProfileActivity extends AppCompatActivity {
 
     LinearLayout linearLayout;
-    ImageView profile;
+    ImageView profile, back;
     EditText userName, password, confirmPassword, phoneNo, address;
     Button save;
     Uri selectedImage;
+    CardView cardView;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -46,7 +47,15 @@ public class EditProfileActivity extends AppCompatActivity {
         phoneNo = findViewById(R.id.et_phone_no);
         address = findViewById(R.id.et_address);
         save = findViewById(R.id.btn_save);
+        cardView = findViewById(R.id.card_post);
+        back = findViewById(R.id.iv_back);
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
@@ -58,9 +67,11 @@ public class EditProfileActivity extends AppCompatActivity {
         phoneNo.setText(user.getPhone_no());
         address.setText(user.getAddress());
         if(user.getPhoto() != null ){
-            profile.setVisibility(View.VISIBLE);
+            cardView.setVisibility(View.VISIBLE);
             linearLayout.setVisibility(View.GONE);
-            profile.setImageBitmap(BitmapFactory.decodeFile(user.getPhoto()));
+            Glide.with(getApplicationContext())
+                    .load(Uri.parse(user.getPhoto()))
+                    .into(profile);
         }
 
         linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +143,7 @@ public class EditProfileActivity extends AppCompatActivity {
             switch (requestCode) {
                 case 11:
                     //data.getData returns the content URI for the selected Image
-                    profile.setVisibility(View.VISIBLE);
+                    cardView.setVisibility(View.VISIBLE);
                     linearLayout.setVisibility(View.GONE);
                     selectedImage = data.getData();
                     Toast.makeText(this,""+selectedImage,Toast.LENGTH_SHORT).show();

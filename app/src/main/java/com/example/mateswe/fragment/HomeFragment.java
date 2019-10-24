@@ -1,4 +1,5 @@
 package com.example.mateswe.fragment;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.mateswe.R;
 import com.example.mateswe.adapter.FavouriteBookAdapter;
 import com.example.mateswe.db.AppDatabase;
@@ -40,12 +42,8 @@ public class HomeFragment extends Fragment {
 //        rcMostReadBook = view.findViewById(R.id.rv_most_read_book);
 //        rcBooks = view.findViewById(R.id.rv_books);
 
-        //Favourite Book
+
         alFavouriteBook = AppDatabase.getAppDatabase(getContext()).bookDao().getAll();
-        favouriteBookAdapter = new FavouriteBookAdapter(getContext(),alFavouriteBook);
-        rcFavouriteBook.setAdapter(favouriteBookAdapter);
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
-        rcFavouriteBook.setLayoutManager(mGridLayoutManager);
 //
 //        //Most read book
 //        mostReadAdapter = new FavouriteBookAdapter(getContext(), alFavouriteBook);
@@ -59,5 +57,15 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
+    @Override
+    public void onResume() { // 0 - for private mode
+        alFavouriteBook.clear();
+        alFavouriteBook = AppDatabase.getAppDatabase(getContext()).bookDao().getAll();
+        favouriteBookAdapter = new FavouriteBookAdapter(getContext(),alFavouriteBook);
+        rcFavouriteBook.setAdapter(favouriteBookAdapter);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+        rcFavouriteBook.setLayoutManager(mGridLayoutManager);
+        favouriteBookAdapter.notifyDataSetChanged();
+        super.onResume();
+    }
 }

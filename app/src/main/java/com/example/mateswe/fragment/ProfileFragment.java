@@ -48,7 +48,7 @@ public class ProfileFragment extends Fragment {
         phoneNo = view.findViewById(R.id.tv_phone_no);
         address = view.findViewById(R.id.tv_address);
         logOut = view.findViewById(R.id.btn_logout);
-        profile = view.findViewById(R.id.iv_profile1);
+        profile = view.findViewById(R.id.iv_profile);
 
         pref = getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         editor = pref.edit();

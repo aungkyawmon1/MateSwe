@@ -33,7 +33,7 @@ public class FavouriteBookAdapter extends RecyclerView.Adapter<FavouriteBookAdap
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(inflater).inflate(R.layout.book_design, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_design, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
 
         return holder;
@@ -55,7 +55,7 @@ public class FavouriteBookAdapter extends RecyclerView.Adapter<FavouriteBookAdap
         ImageView bookPhoto;
         Book book;
 
-        public MyViewHolder(final View itemView) {
+        public MyViewHolder(View itemView) {
             super(itemView);
 
             bookName = (TextView) itemView.findViewById(R.id.tv_book_name);
@@ -66,7 +66,7 @@ public class FavouriteBookAdapter extends RecyclerView.Adapter<FavouriteBookAdap
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(inflater, BookActivity.class);
-                    intent.putExtra("id",book.getId());
+                    intent.putExtra("id",book.getId()+"");
                     inflater.startActivity(intent);
                 }
             });
@@ -75,9 +75,11 @@ public class FavouriteBookAdapter extends RecyclerView.Adapter<FavouriteBookAdap
         public void bindView(final Book book){
 
             this.book = book;
-            Glide.with(inflater)
-                    .load(Uri.parse(book.getPhoto()))
-                    .into(bookPhoto);
+            if(book.getPhoto() != null) {
+                Glide.with(inflater)
+                        .load(Uri.parse(book.getPhoto()))
+                        .into(bookPhoto);
+            }
             bookName.setText(book.getBook_name());
             author.setText(book.getAuthor());
 
