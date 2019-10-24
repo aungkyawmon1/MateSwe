@@ -58,7 +58,6 @@ public class ProfileFragment extends Fragment {
         phoneNo.setText(user.getPhone_no());
         address.setText(user.getAddress());
 
-        Toast.makeText(getContext(),user.getPhoto()+"Edited!",Toast.LENGTH_SHORT).show();
         if(user.getPhoto() != null)
             Glide.with(getContext())
             .load(Uri.parse(user.getPhoto()))

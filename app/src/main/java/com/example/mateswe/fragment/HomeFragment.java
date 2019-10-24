@@ -1,4 +1,5 @@
 package com.example.mateswe.fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,9 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.mateswe.R;
+import com.example.mateswe.activity.SearchActivity;
 import com.example.mateswe.adapter.FavouriteBookAdapter;
 import com.example.mateswe.db.AppDatabase;
 import com.example.mateswe.entity.Book;
@@ -30,15 +34,24 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private RecyclerView rcFavouriteBook, rcMostReadBook, rcBooks;
+    ImageView search;
+    private RecyclerView rcFavouriteBook;
     private List<Book> alFavouriteBook;
-    private FavouriteBookAdapter favouriteBookAdapter, mostReadAdapter, booksAdapter;
-    @Override
+    private FavouriteBookAdapter favouriteBookAdapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         rcFavouriteBook = view.findViewById(R.id.rv_favourite_book);
+        search =view.findViewById(R.id.imageSearch);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), SearchActivity.class);
+                startActivity(i);
+            }
+        });
 //        rcMostReadBook = view.findViewById(R.id.rv_most_read_book);
 //        rcBooks = view.findViewById(R.id.rv_books);
 

@@ -22,7 +22,9 @@ public class BookActivity extends AppCompatActivity {
 
     private ImageView back, bookPhoto;
     private Button edit, delete;
-    private TextView bookName, author, price, summary;
+    private TextView bookName, author, price,summary;
+
+    AlertDialog.Builder builder;
     Book book;
     String id;
     @Override
@@ -73,25 +75,30 @@ public class BookActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BookActivity.this);
-                alertDialogBuilder.setMessage("Are you sure, you want to delete");
-                        alertDialogBuilder.setPositiveButton("yes",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface arg0, int arg1) {
-                                        AppDatabase.getAppDatabase(BookActivity.this).bookDao().delete(book);
-                                        finish();
-                                    }
-                                });
+                //Uncomment the below code to Set the message and title from the strings.xml file
+                builder = new AlertDialog.Builder(BookActivity.this);
 
-                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
+                //Setting message manually and performing action on button click
+                builder.setMessage("Do you want to delete this book ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                AppDatabase.getAppDatabase(BookActivity.this).bookDao().delete(book);
+                                finish();
 
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
+                                dialog.cancel();
+                            }
+                        });
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Delete!");
+                alert.show();
             }
         });
     }

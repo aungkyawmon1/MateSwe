@@ -31,7 +31,7 @@ public class EditProfileActivity extends AppCompatActivity {
     Button save;
     Uri selectedImage;
     CardView cardView;
-
+    String strPassword;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     User user;
@@ -42,8 +42,8 @@ public class EditProfileActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.ll_post_image);
         profile = findViewById(R.id.iv_profile);
         userName = findViewById(R.id.et_username);
-        password = findViewById(R.id.et_password);
-        confirmPassword = findViewById(R.id.et_confirm_password);
+//        password = findViewById(R.id.et_password);
+//        confirmPassword = findViewById(R.id.et_confirm_password);
         phoneNo = findViewById(R.id.et_phone_no);
         address = findViewById(R.id.et_address);
         save = findViewById(R.id.btn_save);
@@ -66,6 +66,7 @@ public class EditProfileActivity extends AppCompatActivity {
         userName.setText(user.getUser_name());
         phoneNo.setText(user.getPhone_no());
         address.setText(user.getAddress());
+        strPassword = user.getPassword();
         if(user.getPhoto() != null ){
             cardView.setVisibility(View.VISIBLE);
             linearLayout.setVisibility(View.GONE);
@@ -92,15 +93,13 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String strUserName = userName.getText().toString();
-                String strPassword = password.getText().toString();
-                String strConfirmPassword = confirmPassword.getText().toString();
                 String strPhoneNo = phoneNo.getText().toString();
                 String strAddress = address.getText().toString();
                 String strPhoto = null;
                 if(selectedImage != null){
                     strPhoto = selectedImage.toString();
                 }
-                if(strPassword.equals(strConfirmPassword)){
+
                     user.setUser_name(strUserName);
                     user.setPassword(strPassword);
                     user.setPhone_no(strPhoneNo);
@@ -113,10 +112,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     AppDatabase.getAppDatabase(EditProfileActivity.this).userDao().update(user);
                     Toast.makeText(getApplicationContext(),"Edited!",Toast.LENGTH_SHORT).show();
                     finish();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"Password must be same!",Toast.LENGTH_SHORT).show();
-                }
             }
         });
 

@@ -24,6 +24,9 @@ public interface BookDao {
     @Query("SELECT COUNT(*) from book")
     int countBooks();
 
+    @Query("SELECT * FROM book WHERE author LIKE :author")
+    List<Book> searchAuthor(String author);
+
     @Insert
     void insert(Book book);
 

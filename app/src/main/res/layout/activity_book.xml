@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_margin="@dimen/fragment_title_margin_medium"
-                        android:text="Edit"
+                        android:text="ပြင်ဆင်မည်"
                         android:textColor="#fff"
                         android:layout_gravity="center"
                         android:background="@drawable/button_round_corner"/>
@@ -102,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_margin="@dimen/fragment_title_margin_medium"
-                        android:text="Delete"
+                        android:text="ဖျက်သိမ်းမည်"
                         android:textColor="#fff"
                         android:layout_gravity="center"
                         android:background="@drawable/button_delete"/>

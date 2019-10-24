@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         if(permission>0){
             Intent intObj = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intObj);
+            finish();
         }
 
         login.setOnClickListener(new View.OnClickListener() {

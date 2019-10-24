@@ -106,7 +106,7 @@
                 android:layout_width="@dimen/fragment_title_margin_extra_large"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fragment_title_margin_medium"
-                android:text="Save"
+                android:text="သိမ်းမည်"
                 android:textColor="#fff"
                 android:background="@drawable/button_round_corner"/>
 

@@ -55,7 +55,7 @@ public class FavouriteBookAdapter extends RecyclerView.Adapter<FavouriteBookAdap
         ImageView bookPhoto;
         Book book;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(final View itemView) {
             super(itemView);
 
             bookName = (TextView) itemView.findViewById(R.id.tv_book_name);
@@ -65,9 +65,9 @@ public class FavouriteBookAdapter extends RecyclerView.Adapter<FavouriteBookAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(inflater, BookActivity.class);
+                    Intent intent = new Intent(itemView.getContext(), BookActivity.class);
                     intent.putExtra("id",book.getId()+"");
-                    inflater.startActivity(intent);
+                    itemView.getContext().startActivity(intent);
                 }
             });
 
