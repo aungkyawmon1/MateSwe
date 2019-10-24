@@ -18,7 +18,7 @@ public class Book {
     private String author;
 
     @ColumnInfo(name="price")
-    private double price;
+    private String price;
 
     @ColumnInfo(name = "summary")
     private String summary;
@@ -50,11 +50,11 @@ public class Book {
         this.author = author;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

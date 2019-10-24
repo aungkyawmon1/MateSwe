@@ -12,9 +12,12 @@ import android.view.ViewGroup;
 
 import com.example.mateswe.R;
 import com.example.mateswe.adapter.FavouriteBookAdapter;
+import com.example.mateswe.db.AppDatabase;
+import com.example.mateswe.entity.Book;
 import com.example.mateswe.model.FavouriteBook;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
@@ -26,7 +29,7 @@ public class HomeFragment extends Fragment {
     }
 
     private RecyclerView rcFavouriteBook, rcMostReadBook, rcBooks;
-    private ArrayList<FavouriteBook> alFavouriteBook;
+    private List<Book> alFavouriteBook;
     private FavouriteBookAdapter favouriteBookAdapter, mostReadAdapter, booksAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +41,7 @@ public class HomeFragment extends Fragment {
 //        rcBooks = view.findViewById(R.id.rv_books);
 
         //Favourite Book
-        alFavouriteBook = getData();
+        alFavouriteBook = AppDatabase.getAppDatabase(getContext()).bookDao().getAll();
         favouriteBookAdapter = new FavouriteBookAdapter(getContext(),alFavouriteBook);
         rcFavouriteBook.setAdapter(favouriteBookAdapter);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
@@ -57,14 +60,4 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private ArrayList<FavouriteBook> getData(){
-        ArrayList<FavouriteBook> favouriteBooks = new ArrayList<>();
-
-        favouriteBooks.add(new FavouriteBook(R.drawable.alinkaryeekyaw_pandaung,"ပန်းဒေါင်း","အလက်ာရည်ကျော်"));
-        favouriteBooks.add(new FavouriteBook(R.drawable.juu_iwanttoseeyou,"တွေ့ချင်လှပြီ","ဂျူး"));
-        favouriteBooks.add(new FavouriteBook(R.drawable.juu_maungtoeyoutekyartwe,"မောင်တို့ယောက်ျားတွေ","ဂျူး"));
-        favouriteBooks.add(new FavouriteBook(R.drawable.juu_thetownilove,"ကျွန်မချစ်သော မြို့","ဂျူး"));
-        favouriteBooks.add(new FavouriteBook(R.drawable.luhtuseinwin_first_sprit,"အထက်တန်စား စိတ်ဓာတ်","လူထုစိန်ဝင်း"));
-        return favouriteBooks;
-    }
 }

@@ -1,19 +1,18 @@
 package com.example.mateswe.model;
 
 public class FavouriteBook {
-    private int image;
-    private String bookName, author;
+    private String bookName, author, image;
 
-    public FavouriteBook(int image, String bookName, String author){
+    public FavouriteBook(String image, String bookName, String author){
         this.image = image;
         this.bookName = bookName;
         this.author = author;
     }
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String  image) {
         this.image = image;
     }
 

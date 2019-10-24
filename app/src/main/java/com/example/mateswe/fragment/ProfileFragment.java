@@ -16,9 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.mateswe.R;
 import com.example.mateswe.activity.EditProfileActivity;
 import com.example.mateswe.activity.LoginActivity;
+import com.example.mateswe.activity.MainActivity;
 import com.example.mateswe.activity.SignUpActivity;
 import com.example.mateswe.db.AppDatabase;
 import com.example.mateswe.entity.User;
@@ -56,9 +58,12 @@ public class ProfileFragment extends Fragment {
         phoneNo.setText(user.getPhone_no());
         address.setText(user.getAddress());
 
-        Toast.makeText(getContext(),user.getPhoto()+"Edit  ed!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),user.getPhoto()+"Edited!",Toast.LENGTH_SHORT).show();
         if(user.getPhoto() != null)
-            profile.setImageBitmap(BitmapFactory.decodeFile(new File(user.getPhoto()).getAbsolutePath()));
+            Glide.with(getContext())
+            .load(Uri.parse(user.getPhoto()))
+            .into(profile);
+
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +96,9 @@ public class ProfileFragment extends Fragment {
         phoneNo.setText(user.getPhone_no());
         address.setText(user.getAddress());
         if(user.getPhoto() != null)
-            profile.setImageBitmap(BitmapFactory.decodeFile(new File(user.getPhoto()).getAbsolutePath()));
+            Glide.with(getContext())
+                    .load(Uri.parse(user.getPhoto()))
+                    .into(profile);
         super.onResume();
     }
 

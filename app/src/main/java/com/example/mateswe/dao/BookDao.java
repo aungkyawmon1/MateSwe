@@ -8,6 +8,7 @@ import androidx.room.Update;
 
 import com.example.mateswe.entity.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public interface BookDao {
     @Query("SELECT * FROM book")
     List<Book> getAll();
 
-    @Query("SELECT * FROM book where id = :id")
+    @Query("SELECT * FROM book WHERE id = :id")
     Book findByID(String id);
 
     @Query("SELECT COUNT(*) from book")

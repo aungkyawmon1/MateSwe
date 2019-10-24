@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.mateswe.R;
 import com.example.mateswe.db.AppDatabase;
 import com.example.mateswe.entity.User;
@@ -86,12 +87,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 String strAddress = address.getText().toString();
                 String strPhoto = null;
                 if(selectedImage != null){
-                    String[] filePathColumn = {MediaStore.Images.Media.DATA };
-                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn,null, null, null);
-                    cursor.moveToFirst();
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    strPhoto = cursor.getString(columnIndex);
-                    cursor.close();
+                    strPhoto = selectedImage.toString();
                 }
                 if(strPassword.equals(strConfirmPassword)){
                     user.setUser_name(strUserName);

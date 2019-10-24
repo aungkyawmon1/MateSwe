@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.mateswe.R;
+import com.example.mateswe.db.AppDatabase;
+import com.example.mateswe.entity.Book;
 
 
 public class SavedFragment extends Fragment {
@@ -53,17 +55,20 @@ public class SavedFragment extends Fragment {
             public void onClick(View v) {
                 String strBookName = bookName.getText().toString();
                 String strAuthor = author.getText().toString();
-                Double price = Double.parseDouble(author.getText().toString());
+                String price = author.getText().toString();
                 String strSummary = summary.getText().toString();
                 String strPhoto = null;
                 if(selectedImage != null){
-                    String[] filePathColumn = {MediaStore.Images.Media.DATA };
-                    Cursor cursor = getContext().getContentResolver().query(selectedImage, filePathColumn,null, null, null);
-                    cursor.moveToFirst();
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    strPhoto = cursor.getString(columnIndex);
-                    cursor.close();
+                   strPhoto = selectedImage.toString();
                 }
+                Book book= new Book();
+                book.setBook_name(strBookName);
+                book.setAuthor(strAuthor);
+                book.setPrice(price);
+                book.setSummary(strSummary);
+                book.setPhoto(strPhoto);
+                AppDatabase.getAppDatabase(getContext()).bookDao().insert(book);
+                Toast.makeText(getContext(),"Posted!",Toast.LENGTH_SHORT).show();
             }
         });
         photoAdd.setOnClickListener(new View.OnClickListener() {
@@ -105,16 +110,7 @@ public class SavedFragment extends Fragment {
                     cardView.setVisibility(View.VISIBLE);
                     photoAdd.setVisibility(View.GONE);
                     selectedImage = data.getData();
-                    Toast.makeText(getContext(),""+selectedImage,Toast.LENGTH_SHORT).show();
-//                    addPhoto.setImageURI(selectedImage);
-                    String[] filePathColumn = {MediaStore.Images.Media.DATA };
-                    Cursor cursor = getContext().getContentResolver().query(selectedImage, filePathColumn,null, null, null);
-                    cursor.moveToFirst();
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String strPhoto = cursor.getString(columnIndex);
-                    cursor.close();
-
-                    addPhoto.setImageBitmap(BitmapFactory.decodeFile(strPhoto));
+                    addPhoto.setImageURI(selectedImage);
                     break;
             }
 
