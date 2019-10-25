@@ -95,7 +95,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 String strUserName = userName.getText().toString();
                 String strPhoneNo = phoneNo.getText().toString();
                 String strAddress = address.getText().toString();
-                String strPhoto = null;
+                String strPhoto = user.getPhoto();
                 if(selectedImage != null){
                     strPhoto = selectedImage.toString();
                 }

@@ -123,7 +123,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fragment_title_margin_medium"
-            android:text="logout"
+            android:text="ထွက် မည်"
+            android:textColor="#fff"
             android:layout_gravity="center"
             android:background="@drawable/button_delete"/>
         </LinearLayout>

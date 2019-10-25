@@ -70,7 +70,7 @@ public class EditActivity extends AppCompatActivity {
                 String strAuthor = author.getText().toString();
                 String strPrice = price.getText().toString();
                 String strSummary = summary.getText().toString();
-                String strPhoto = null;
+                String strPhoto = book.getPhoto();
                 if(selectedImage != null){
                     strPhoto = selectedImage.toString();
                 }

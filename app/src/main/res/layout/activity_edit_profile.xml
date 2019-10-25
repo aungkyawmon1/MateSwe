@@ -69,21 +69,21 @@
                 android:hint="Username"
                 android:layout_margin="@dimen/fragment_title_margin_small"/>
 
-            <EditText
-                android:id="@+id/et_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:layout_margin="@dimen/fragment_title_margin_small"/>
+<!--            <EditText-->
+<!--                android:id="@+id/et_password"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Password"-->
+<!--                android:inputType="textPassword"-->
+<!--                android:layout_margin="@dimen/fragment_title_margin_small"/>-->
 
-            <EditText
-                android:id="@+id/et_confirm_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Confirm password"
-                android:inputType="textPassword"
-                android:layout_margin="@dimen/fragment_title_margin_small"/>
+<!--            <EditText-->
+<!--                android:id="@+id/et_confirm_password"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Confirm password"-->
+<!--                android:inputType="textPassword"-->
+<!--                android:layout_margin="@dimen/fragment_title_margin_small"/>-->
 
             <EditText
                 android:id="@+id/et_phone_no"
